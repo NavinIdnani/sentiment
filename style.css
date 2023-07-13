@@ -1,0 +1,230 @@
+/* Set default styles for body, header and main */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+
+/* Style the navigation menu */
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+li {
+    margin: 0 10px;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+
+
+/* Style the selected link */
+
+.selectedLink {
+    position: relative;
+}
+
+.side {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px;
+}
+
+.left {
+    left: 0;
+    border-color: transparent #fff transparent transparent;
+}
+
+.right {
+    right: 0;
+    border-color: transparent transparent transparent #fff;
+}
+
+.outside {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    width: 10px;
+    background-color: #333;
+}
+
+.left.outside {
+    left: -10px;
+}
+
+.right.outside {
+    right: -10px;
+}
+
+.dot {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+
+/* Style the active link */
+
+[data-active="true"] a {
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+}
+
+
+/* Style the home section */
+
+#home {
+    text-align: center;
+}
+
+textarea {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+    resize: none;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#output-container {
+    margin-top: 20px;
+}
+
+#output-text {
+    font-weight: bold;
+}
+
+
+/* Style the dashboard section */
+
+#dashboard {
+    text-align: center;
+    background: url(https://tse1.mm.bing.net/th?id=OIP.14z4f1HNbGLI-kUd_YXITgHaEK&pid=Api&P=0);
+}
+
+.column {
+    float: left;
+    width: 18%;
+    padding: 10px;
+}
+
+
+/* Clear floats after image containers */
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#about {
+    background: url(aboutus.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 5px;
+}
+
+
+/* Style the about and contact sections */
+
+#about,
+#contact {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#contact {
+    text-align: center;
+    background: url(contactus.jpeg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 1000px;
+}
+
+#about {
+    background-image: url('aboutus.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    image-rendering: auto;
+    background-size: auto;
+}
+
+
+/* Style the login and register sections  
+*/
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+}
+
+button[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}

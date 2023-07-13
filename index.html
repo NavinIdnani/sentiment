@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Set default styles for body, header and main */
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        /* Style the navigation menu */
+        
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        li {
+            margin: 0 10px;
+        }
+        
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            position: relative;
+        }
+        /* Style the selected link */
+        
+        .selectedLink {
+            position: relative;
+        }
+        
+        .side {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px;
+        }
+        
+        .left {
+            left: 0;
+            border-color: transparent #fff transparent transparent;
+        }
+        
+        .right {
+            right: 0;
+            border-color: transparent transparent transparent #fff;
+        }
+        
+        .outside {
+            position: absolute;
+            top: -10px;
+            bottom: -10px;
+            width: 10px;
+            background-color: #333;
+        }
+        
+        .left.outside {
+            left: -10px;
+        }
+        
+        .right.outside {
+            right: -10px;
+        }
+        
+        .dot {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        /* Style the active link */
+        
+        [data-active="true"] a {
+            background-color: #fff;
+            color: #333;
+            border-radius: 10px;
+        }
+        /* Style the home section */
+        
+        #home {
+            text-align: center;
+        }
+        
+        textarea {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            width: 50%;
+            resize: none;
+        }
+        
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        #output-container {
+            margin-top: 20px;
+        }
+        
+        #output-text {
+            font-weight: bold;
+        }
+        /* Style the dashboard section */
+        
+        #dashboard {
+            text-align: center;
+            background: url(https://tse1.mm.bing.net/th?id=OIP.14z4f1HNbGLI-kUd_YXITgHaEK&pid=Api&P=0);
+        }
+        
+        .column {
+            float: left;
+            width: 18%;
+            padding: 10px;
+        }
+        /* Clear floats after image containers */
+        
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        
+        #about {
+            background: url(aboutus.png);
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: 5px;
+        }
+        /* Style the about and contact sections */
+        
+        #about,
+        #contact {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        #contact {
+            text-align: center;
+            background: url(contactus.jpeg);
+            background-repeat: no-repeat;
+            background-size: auto;
+            background-position: 1000px;
+        }
+        
+        #about {
+            background-image: url('aboutus.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            image-rendering: auto;
+            background-size: auto;
+        }
+        /* Style the login and register sections  
+*/
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            width: 50%;
+        }
+        
+        button[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>Sentiment Analysis</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+
+                <div class="selectedLink">
+                    <div class="side left"></div>
+                    <div class="side right"></div>
+                    <div class="outside left"></div>
+                    <div class="outside right"></div>
+                    <div class="dot"></div>
+                </div>
+                <li data-active="true"><a href="#home">Home</a></li>
+                <li data-active="true"><a href="#dashboard">Dashboard</a></li>
+
+                <li data-active="false"><a href="#about">About us</a></li>
+                <li data-active="false"><a href="#contact">Contact us</a></li>
+                <li data-active="true"><a href="#login">Login</a></li>
+                <li data-active="true"><a href="#register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <center>
+                <h1>Sentiment Analysis</h1>
+                <img src="https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2018/07/performing-twitter-sentiment-analysis1.jpg">
+                <textarea id="input-text" rows="10" cols="50" placeholder="Enter your review below to perform sentiment analysis and select your choice of your website "></textarea>
+                <br/><br/>
+                <input type="radio" id="html" name="fav_language" value="HTML">
+                <label for="html">Flipkart</label><br>
+                <input type="radio" id="css" name="fav_language" value="CSS">
+                <label for="css">Amazon</label><br>
+                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                <label for="javascript">Wallmart</label>
+                <br/><br/>
+                <button id="analyze-btn">Analyze</button>
+                <div id="output-container">
+                    <p id="output-text"></p>
+                </div>
+            </center>
+        </section>
+        <center>
+            <section id="dashboard">
+                <h1>Dashboard</h1>
+                <p>Here is our dashboard:</p>
+                <div class="row">
+                    <h1>Amazon sentiment analysis outcome</h1>
+                    <div class="column">
+                        <img src="pic 1 amazon.png" alt="Wordcloud" style="width:90%">
+                        <figcaption>Wordcloud</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 2 amazon.png" alt="Barchart" style="width:110%">
+                        <figcaption>Barchart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 3 amazon.png" alt="Piechart" style="width:80%">
+                        <figcaption>Piechart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 4 amazon.png" alt="Accuracies" style="width:70%">
+                        <figcaption>Accuracies</figcaption>
+
+                    </div>
+                    <div class="column">
+                        <img src="pic 5 amazon.png" alt="Comparsion" style="width:120%">
+                        <figcaption>Comparision</figcaption>
+                    </div>
+                </div>
+                <div class="row">
+                    <h1>Flipkart sentiment analysis outcome</h1>
+                    <div class="column">
+                        <img src="pic 1 flipkart.png" alt="Wordcloud" style="width:90%">
+                        <figcaption>Wordcloud</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 2 flipkart.png" alt="Barchart" style="width:110%">
+                        <figcaption>Barchart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 3 flipkart.png" alt="Piechart" style="width:80%">
+                        <figcaption>Piechart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 4 flipkart.png" alt="Accuracies" style="width:70%">
+                        <figcaption>Accuracies</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 5 flipkart.png" alt="Comparsion" style="width:120%">
+                        <figcaption>Comparsion</figcaption>
+                    </div>
+                </div>
+                <div class="row">
+                    <h1>Walmart sentiment analysis outcome</h1>
+                    <div class="column">
+                        <img src="pic 1 walmart.png" alt="Wordcloud" style="width:90%">
+                        <figcaption>Wordcloud</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 2 walmart.png" alt="Barchart" style="width:110%">
+                        <figcaption>Barchart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 3 walmart.png" alt="Piechart" style="width:80%">
+                        <figcaption>Piechart</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 4 walmart.png" alt="Accuracies" style="width:70%">
+                        <figcaption>Accuracies</figcaption>
+                    </div>
+                    <div class="column">
+                        <img src="pic 5 walmart.png" alt="Comparsion" style="width:120%">
+                        <figcaption>Comparsion</figcaption>
+                    </div>
+                </div>
+            </section>
+        </center>
+        <center></center>
+        <section id="about">
+            <h1>About Us</h1>
+            <p>We the Students of Vivekanand Education Society Institute of Technology have keen interest in developing building cool things. We love to deploy and develop cool things</p>
+        </section>
+        <section id="contact">
+            <h1>Contact Us</h1>
+            <p>You can contact us at:</p>
+            <ul>
+                <li>Email: 2020.chitra.atlani@ves.ac.in</li>
+                <li>Email:2020.nikita.narwani@ves.ac.in</li>
+                <li>Email:2020.navin.idnani@ves.ac.in</li>
+                <li>Email:2020.tammana.bhatija@ves.ac.in</li>
+            </ul>
+        </section>
+        <section id="login">
+            <center>
+                <h1>Login</h1>
+            </center>
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+        <section id="register">
+            <center>
+                <h1>Register</h1>
+            </center>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+        </center>
+    </main>
+</body>
+
+</html>
